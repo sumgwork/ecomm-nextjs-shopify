@@ -15,6 +15,9 @@ export default function Home({
   return (
     <div>
       <pre>{JSON.stringify(products, null, 2)}</pre>
+      {/* {products map((product) => (
+        <div key={product.id}>{product.title}</div>
+      ))} */}
     </div>
   );
 }

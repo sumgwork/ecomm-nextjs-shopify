@@ -1,19 +1,17 @@
-const fetchApi = async () => {
-  const url = "https://jsonplaceholder.typicode.com/todos";
+import { Product, ProductConnection } from "shopify-storefront-api-typings";
+import fetchApi from "../utils/fetch-api";
+import getAllProductsQuery from "../utils/queries/get-all-products";
 
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+type ReturnType = { products: ProductConnection };
+
+const getAllProducts = async (): Promise<any> => {
+  const { data } = await fetchApi<ReturnType>({
+    query: getAllProductsQuery,
   });
-  const data = await res.json();
-  return { data };
-};
 
-const getAllProducts = async (): Promise<any[]> => {
-  const products = await fetchApi();
-  return products.data;
+  // TODO:  normalize and return new data
+
+  return data;
 };
 
 export default getAllProducts;
