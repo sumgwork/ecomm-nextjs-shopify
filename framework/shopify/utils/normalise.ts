@@ -21,9 +21,10 @@ export const normaliseProduct = (productNode: ShopifyProduct): Product => {
     name,
     vendor,
     description,
+    handle,
     path: `/${handle}`,
     images: normaliseProductImages(images),
-    slug: handle.replace(/^\/+|\/+$/g), // remove all leading and trailing slash,
+    slug: handle.replace(/^\/+|\/+$/g, ""), // remove all leading and trailing slash,
   };
 
   return product;
