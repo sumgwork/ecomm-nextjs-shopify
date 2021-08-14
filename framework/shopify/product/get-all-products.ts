@@ -1,17 +1,19 @@
-import { Product, ProductConnection } from "shopify-storefront-api-typings";
-import fetchApi from "../utils/fetch-api";
-import getAllProductsQuery from "../utils/queries/get-all-products";
+import { ProductConnection } from "shopify-storefront-api-typings";
+import { Product } from "@common/types/productTypes";
+import { fetchApi, normaliseProduct, getAllProductsQuery } from "../utils";
 
 type ReturnType = { products: ProductConnection };
 
-const getAllProducts = async (): Promise<any> => {
+const getAllProducts = async (): Promise<Product[]> => {
   const { data } = await fetchApi<ReturnType>({
     query: getAllProductsQuery,
   });
 
-  // TODO:  normalize and return new data
+  const products =
+    data.products.edges.map(({ node: product }) => normaliseProduct(product)) ??
+    [];
 
-  return data;
+  return products;
 };
 
 export default getAllProducts;
