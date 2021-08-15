@@ -1,9 +1,10 @@
 import {
   ImageConnection,
   ImageEdge,
+  MoneyV2,
   Product as ShopifyProduct,
 } from "shopify-storefront-api-typings";
-import { Product } from "@common/types/productTypes";
+import { Product, ProductPrice } from "@common/types/productTypes";
 
 export const normaliseProduct = (productNode: ShopifyProduct): Product => {
   const {
@@ -13,6 +14,7 @@ export const normaliseProduct = (productNode: ShopifyProduct): Product => {
     handle,
     description,
     images,
+    priceRange,
     ...rest
   } = productNode;
 
@@ -25,6 +27,7 @@ export const normaliseProduct = (productNode: ShopifyProduct): Product => {
     path: `/${handle}`,
     images: normaliseProductImages(images),
     slug: handle.replace(/^\/+|\/+$/g, ""), // remove all leading and trailing slash,
+    price: normaliseProductPrice(priceRange.minVariantPrice),
   };
 
   return product;
@@ -35,3 +38,11 @@ const normaliseProductImages = ({ edges }: { edges: Array<ImageEdge> }) =>
     url: `/images/${url}`,
     alt,
   }));
+
+const normaliseProductPrice = (price: MoneyV2): ProductPrice => {
+  const { currencyCode, amount } = price;
+  return {
+    price: +amount,
+    currencyCode,
+  };
+};
