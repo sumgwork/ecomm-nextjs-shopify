@@ -67,3 +67,11 @@
   @apply bg-primary pb-4 pt-2 px-6 font-semibold text-sm;
   letter-spacing: 0.4px;
 }
+
+.slimProduct {
+  @apply flex flex-col items-center;
+
+  & span {
+    @apply bg-black text-white p-4 font-black;
+  }
+}
