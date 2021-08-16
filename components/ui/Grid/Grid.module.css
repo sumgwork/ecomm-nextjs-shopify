@@ -27,5 +27,10 @@
 }
 
 .layoutB {
-  background: blue;
+  & > *:nth-child(6n + 2),
+  & > *:nth-child(6n + 4) {
+    @screen lg {
+      @apply row-span-2 col-span-2;
+    }
+  }
 }
