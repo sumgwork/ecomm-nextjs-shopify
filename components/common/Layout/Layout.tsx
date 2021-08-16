@@ -1,11 +1,16 @@
 import { FC } from "react";
 import { Footer, Navbar } from "@components/common";
 import s from "./Layout.module.css";
+import { Sidebar } from "@components/ui";
+import { CartSidebar } from "@components/cart";
 
 const Layout: FC = ({ children }) => {
   return (
     <div className={s.root}>
-      <Navbar />
+      <Navbar />{" "}
+      <Sidebar>
+        <CartSidebar />
+      </Sidebar>
       <main className="fit">{children}</main>
       <Footer />
     </div>
