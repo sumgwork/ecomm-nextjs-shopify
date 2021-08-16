@@ -1,19 +1,20 @@
 import { FC } from "react";
+import { useUI } from "../context";
 
 interface Props {
   children: any;
+  isOpen: boolean;
 }
 
-const Sidebar: FC<Props> = ({ children }) => {
-  const isOpen = true;
-
+const Sidebar: FC<Props> = ({ children, isOpen }) => {
+  const context = useUI();
   return (
     <>
       {isOpen ? (
         <div className="fixed inset-0 overflow-hidden h-full z-50">
           <div className="absolute inset-0 overflow-hidden">
             <div
-              onClick={() => {}}
+              onClick={context.closeSidebar}
               className="absolute inset-0 bg-black bg-opacity-50 transition-opacity"
             />
 
