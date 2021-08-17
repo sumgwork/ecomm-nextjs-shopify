@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { AppProps } from "next/app";
 import "@assets/main.css";
+import "keen-slider/keen-slider.min.css";
 import { UIProvider } from "@components/ui/context";
 
 const NoLayout: FC = ({ children }) => <>{children}</>;
