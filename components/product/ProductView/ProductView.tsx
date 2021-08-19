@@ -8,14 +8,15 @@ import cn from "classnames";
 import s from "./ProductView.module.css";
 import { Choices, getVariant } from "../helpers";
 import { useAddItem } from "@common/cart";
-import { useApiProvider } from "@common";
+import { useApiProvider } from "@framework";
 interface Props {
   product: Product;
 }
 
 const ProductView: FC<Props> = ({ product }) => {
   const [choices, setChoices] = useState<Choices>({});
-  const api = useApiProvider();
+  const { hooks, fetcher } = useApiProvider();
+
   const { openSidebar } = useUI();
   const addItem = useAddItem();
 

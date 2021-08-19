@@ -1,11 +1,14 @@
-export const handler = {
-  fetcher: () => {
-    console.log("Fetching Data");
+import { MutationHook } from "@common/types/hooks";
+
+export const handler: MutationHook = {
+  fetcher: (input: any) => {
+    return JSON.stringify(input) + "_MODIFIED";
   },
-  useHook: () => {
+  useHook: ({ fetch }) => {
     const addItemFunction = (input: any) => {
+      const response = fetch(input);
       return {
-        output: JSON.stringify(input) + "_MODIFIED",
+        output: response,
       };
     };
 
