@@ -1,19 +1,23 @@
 import { FC, useState } from "react";
 import { Container, Button } from "@components/ui";
-import { Product } from "@common/types/product";
+import { Product } from "@common/types/productTypes";
 import { ProductSlider, Swatch } from "@components/product";
 import { useUI } from "@components/ui/context";
 import Image from "next/image";
 import cn from "classnames";
 import s from "./ProductView.module.css";
 import { Choices, getVariant } from "../helpers";
+import { useAddItem } from "@common/cart";
+import { useApiProvider } from "@common";
 interface Props {
   product: Product;
 }
 
 const ProductView: FC<Props> = ({ product }) => {
   const [choices, setChoices] = useState<Choices>({});
+  const api = useApiProvider();
   const { openSidebar } = useUI();
+  const addItem = useAddItem();
 
   const variant = getVariant(product, choices);
 
@@ -24,9 +28,10 @@ const ProductView: FC<Props> = ({ product }) => {
         variantId: variant?.id,
         variantOptions: variant?.options,
       };
+      const output = addItem(item);
       console.log(
-        "🚀 ~ file: ProductView.tsx ~ line 27 ~ addToCart ~ item",
-        item
+        "🚀 ~ file: ProductView.tsx ~ line 34 ~ addToCart ~ output",
+        output
       );
 
       openSidebar();

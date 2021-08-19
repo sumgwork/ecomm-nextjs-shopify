@@ -4,18 +4,21 @@ import s from "./Layout.module.css";
 import { Sidebar } from "@components/ui";
 import { CartSidebar } from "@components/cart";
 import { useUI } from "@components/ui/context";
+import { ApiProvider } from "@common";
 
 const Layout: FC = ({ children }) => {
   const context = useUI();
   return (
-    <div className={s.root}>
-      <Navbar />
-      <Sidebar isOpen={context.isSidebarOpen}>
-        <CartSidebar />
-      </Sidebar>
-      <main className="fit">{children}</main>
-      <Footer />
-    </div>
+    <ApiProvider>
+      <div className={s.root}>
+        <Navbar />
+        <Sidebar isOpen={context.isSidebarOpen}>
+          <CartSidebar />
+        </Sidebar>
+        <main className="fit">{children}</main>
+        <Footer />
+      </div>
+    </ApiProvider>
   );
 };
 
